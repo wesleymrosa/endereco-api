@@ -53,4 +53,9 @@ public class EnderecoService {
         return enderecoRepository.findByUf(uf)
                 .stream().map(EnderecoMapper::toDTO).collect(Collectors.toList());
     }
+    
+    public List<EnderecoDTO> listarTudo (){
+        return enderecoRepository.findAll()
+                .stream().map(EnderecoMapper::toDTO).collect(Collectors.toList());
+    }
 }

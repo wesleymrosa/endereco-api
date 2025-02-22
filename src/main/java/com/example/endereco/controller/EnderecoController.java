@@ -41,4 +41,9 @@ public class EnderecoController {
     public ResponseEntity<List<EnderecoDTO>> buscarPorUf(@RequestParam String uf) {
         return ResponseEntity.ok(enderecoService.buscarPorUf(uf));
     }
+
+    @GetMapping
+    public ResponseEntity<List<EnderecoDTO>> listarTudo() {
+        return ResponseEntity.ok(enderecoService.listarTudo());
+    }
 }
