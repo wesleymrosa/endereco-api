@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,19 +40,40 @@ public class EnderecoService {
 
     @Transactional
     public EnderecoDTO buscarPorCep(String cep) {
+        // Cria uma lista local para ir armazenando as mensagens de log
+        List<String> logsInternos = new ArrayList<>();
+
         return enderecoRepository.findByCep(cep)
                 .map(endereco -> {
+                    // Monta a mensagem de log e armazena na lista
+                    String msg = "O CEP informado foi localizado na nossa base de dados. Portanto não será persistido novamente ! " + cep;
+
+
+                    log.info(msg);
+                    logsInternos.add(msg);
+
                     EnderecoDTO dto = EnderecoMapper.toDTO(endereco);
-                    dto.setPersistido(true); // Indica que já existia no banco
-                    log.info("Endereço encontrado no banco de dados para o CEP informado, portanto não será persistido novamente: {}" + cep);
+                    dto.setPersistido(true);
+                    // Associa as mensagens de log ao DTO
+                    dto.setLogs(logsInternos);
                     return dto;
                 })
                 .orElseGet(() -> {
-                    log.info("O CEP não foi encontrado na nossa base de dados. Sistema buscando via API externa o CEP para ser persistido no banco de dados: {}" + cep);
+//                     Mensagem de log caso não encontre no banco
+                    String msg = "O CEP não foi encontrado na nossa base de dados. Sistema buscando, via API externa, o CEP para ser persistido no banco de dados: " + cep;
+
+                    log.info(msg);
+                    logsInternos.add(msg);
+
                     EnderecoDTO dto = viaCepClient.buscarCep(cep);
-                    dto.setPersistido(false); // Indica que foi buscado externamente
+                    dto.setPersistido(false);
+                    // Associa as mensagens de log ao DTO
+                    dto.setLogs(logsInternos);
+
+                    // Persiste no banco
                     Endereco endereco = EnderecoMapper.toEntity(dto);
                     enderecoRepository.save(endereco);
+
                     return dto;
                 });
     }

@@ -2,6 +2,9 @@ package com.example.endereco.dto;
 
 import lombok.Builder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Builder
 public class EnderecoDTO {
     private String cep;
@@ -11,35 +14,20 @@ public class EnderecoDTO {
     private String localidade;
     private String uf;
     private boolean persistido; // Novo campo indicando se veio do banco
-
-    public EnderecoDTO(String cep, String logradouro, String complemento, String bairro, String localidade, String uf, boolean persistido) {
-        this.cep = cep;
-        this.logradouro = logradouro;
-        this.complemento = complemento;
-        this.bairro = bairro;
-        this.localidade = localidade;
-        this.uf = uf;
-        this.persistido = persistido;
-    }
+    private List<String> logs = new ArrayList<>();
 
     public EnderecoDTO() {
     }
 
-    public EnderecoDTO(String cep, String logradouro, String complemento, String bairro, String localidade, String uf) {
+    public EnderecoDTO(String cep, String logradouro, String complemento, String bairro, String localidade, String uf, boolean persistido, List<String> logs) {
         this.cep = cep;
         this.logradouro = logradouro;
         this.complemento = complemento;
         this.bairro = bairro;
         this.localidade = localidade;
         this.uf = uf;
-    }
-
-    public boolean isPersistido() {
-        return persistido;
-    }
-
-    public void setPersistido(boolean persistido) {
         this.persistido = persistido;
+        this.logs = logs;
     }
 
     public String getCep() {
@@ -88,5 +76,21 @@ public class EnderecoDTO {
 
     public void setUf(String uf) {
         this.uf = uf;
+    }
+
+    public boolean isPersistido() {
+        return persistido;
+    }
+
+    public void setPersistido(boolean persistido) {
+        this.persistido = persistido;
+    }
+
+    public List<String> getLogs() {
+        return logs;
+    }
+
+    public void setLogs(List<String> logs) {
+        this.logs = logs;
     }
 }
