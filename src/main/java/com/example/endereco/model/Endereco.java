@@ -1,6 +1,9 @@
 package com.example.endereco.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Builder;
 
 import java.util.Objects;
@@ -12,22 +15,22 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    //@Column(nullable = false, unique = true)
     private String cep;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String logradouro;
 
-    @Column
+    //@Column
     private String complemento;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String bairro;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String localidade;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String uf;
 
     public Endereco() {

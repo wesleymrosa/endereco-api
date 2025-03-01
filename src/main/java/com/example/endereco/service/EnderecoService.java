@@ -46,7 +46,7 @@ public class EnderecoService {
         return enderecoRepository.findByCep(cep)
                 .map(endereco -> {
                     // Monta a mensagem de log e armazena na lista
-                    String msg = "O CEP informado foi localizado na nossa base de dados. Portanto não será persistido novamente ! " + cep;
+                    String msg = "O CEP informado: " + cep + "  foi localizado nos nossos registros. Portanto não será salvo, novamente, no banco de dados !";
 
 
                     log.info(msg);
@@ -60,7 +60,7 @@ public class EnderecoService {
                 })
                 .orElseGet(() -> {
 //                     Mensagem de log caso não encontre no banco
-                    String msg = "O CEP não foi encontrado na nossa base de dados. Sistema buscando, via API externa, o CEP para ser persistido no banco de dados: " + cep;
+                    String msg = "O CEP informado: " + cep + " não foi localizado nos nossos registros. O sistema o buscará, via API externa, e salvará no nosso banco de dados: ";
 
                     log.info(msg);
                     logsInternos.add(msg);

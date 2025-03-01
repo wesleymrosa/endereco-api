@@ -31,12 +31,12 @@ public class EnderecoController {
         EnderecoDTO enderecoDTO = enderecoService.buscarPorCep(cep);
 
         if (enderecoDTO.isPersistido()) {
-            String msg = "O CEP solicitado já está salvo no banco de dados. " + cep;
+            String msg = "O CEP solicitado: " + cep + " já está salvo no nosso banco de dados.";
             log.info(msg);
             // Adiciona a mensagem no DTO
             enderecoDTO.getLogs().add(msg);
         } else {
-            String msg = "O CEP foi salvo no banco de dados após busca externa para o CEP: " + cep;
+            String msg = "O CEP solicitado: " + cep + " foi salvo no banco de dados após busca em API externa.";
             log.info(msg);
             // Adiciona a mensagem no DTO
             enderecoDTO.getLogs().add(msg);
