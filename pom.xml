@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    <!-- Spring Boot Parent -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -10,7 +10,7 @@
         <relativePath/>
     </parent>
 
-
+    <!-- Projeto principal -->
     <groupId>com.example</groupId>
     <artifactId>endereco-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -95,19 +95,18 @@
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.3.0</version> <!-- Verifique a versão mais recente se necessário -->
         </dependency>
-
+        <!-- Dotenv para variáveis de ambiente -->
         <dependency>
             <groupId>io.github.cdimascio</groupId>
             <artifactId>dotenv-java</artifactId>
             <version>3.0.0</version>
         </dependency>
 
-
-
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
+            <!-- Gerenciamento de versões do Spring Cloud -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -116,17 +115,17 @@
                 <scope>import</scope>
             </dependency>
         </dependencies>
-    </dependencyManagement>
 
+    </dependencyManagement>
     <build>
         <plugins>
-            <!-- Spring Boot Plugin -->
+            <!-- Plugin do Spring Boot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- Maven Compiler Plugin with Lombok support -->
+            <!-- Configuração do Maven Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
