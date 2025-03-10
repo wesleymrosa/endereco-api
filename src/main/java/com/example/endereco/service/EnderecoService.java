@@ -26,7 +26,7 @@ public class EnderecoService {
     }
 
     @Transactional
-    public EnderecoDTO buscarPorCep(String cep) {
+    public EnderecoDTO buscarPorCep(String cep) { // Este método faz a busca pelo CEP e a persistência no banco de dados.
         List<String> logsInternos = new ArrayList<>();
 
         return enderecoRepository.findByCep(cep)

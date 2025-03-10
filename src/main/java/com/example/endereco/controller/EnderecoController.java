@@ -25,6 +25,7 @@ public class EnderecoController {
 
     @Operation(summary = "Busca um endereço pelo CEP")
     @GetMapping("/{cep}")
+    // Este endpoint faz a busca pelo CEP e a persistência no banco de dados.
     public ResponseEntity<EnderecoDTO> buscarPorCep(
             @Parameter(description = "CEP do endereço desejado")
             @PathVariable String cep) {
